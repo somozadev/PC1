@@ -1,25 +1,47 @@
 from PyQt5.QtWidgets import *
-
+import Components.FileDialogOpen as FileDialogOpen
+import Components.FileDialogSave as FileDialogSave
+import Components.Dropdown as Dropdown
+import Components.PreviewBox as PreviewBox
 from pathlib import Path
 import sys
-class TabTraining(QWidget):
-    def __init__(self):
-        layout = QGridLayout()
 
+
+class Training(QWidget):
+    def __init__(self, parent=None):
+        super(Training, self).__init__(parent)
+        layout = QGridLayout()
         self.setLayout(layout)
 
-        file_browser_btn = QPushButton("Browse")
-        file_browser_btn.clicked.connect(self.open_file_dialog)
+        #select folders all categories
+        self.file_browser_A = FileDialogOpen.Dialog('Entrantes')
+        self.file_browser_B = FileDialogOpen.Dialog('Principales')
+        self.file_browser_C = FileDialogOpen.Dialog('Segundos')
+        self.file_browser_D = FileDialogOpen.Dialog('Postres')
+        layout.addWidget(self.file_browser_A, 0, 0)
+        layout.addWidget(self.file_browser_B, 1, 0)
+        layout.addWidget(self.file_browser_C, 2, 0)
+        layout.addWidget(self.file_browser_D, 3, 0)
 
-        self.file_list = QListWidget(self)
+        #dropdown algorithm selection
+        self.dropdown_algorithms = Dropdown.Dropdown(self)
+        layout.addWidget(self.dropdown_algorithms, 4, 0)
 
-        layout.addWidget(QLabel('Files:'), 0, 0)
-        layout.addWidget(self.file_list, 1, 0)
-        layout.addWidget(file_browser_btn, 2, 0)
+        #preview coutner + rn btn
+        total_files = self.file_browser_A.GetFilesAmount() + self.file_browser_B.GetFilesAmount() + self.file_browser_C.GetFilesAmount() + self.file_browser_D.GetFilesAmount()
+        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
+        self.preview_box = PreviewBox.Preview(self.values)
+        self.OnDropdownUpdate()
+        layout.addWidget(self.preview_box, 5, 0)
 
+
+        #result box
+        #save file at (similar FileDialog)
+        self.file_save = FileDialogSave.Dialog(self)
+        layout.addWidget(self.file_save, 6, 0)
         self.show()
 
-
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
-        dialog.setFilter("Texts (*.txt)")
+    def OnDropdownUpdate(self):
+        total_files = self.file_browser_A.GetFilesAmount() + self.file_browser_B.GetFilesAmount() + self.file_browser_C.GetFilesAmount() + self.file_browser_D.GetFilesAmount()
+        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
+        self.preview_box.UpdatePreviewValues(self.values)

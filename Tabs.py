@@ -12,21 +12,20 @@ class TabsWidget(QWidget):
 
         # Initialize tab screen
         self.tabs = QTabWidget()
-        self.tab1 = QWidget()
-        self.tab2 = QWidget()
-        self.tab3 = QWidget()
+        self.trainTab = QWidget()
+        self.classificationTab = QWidget()
+        self.webscrapingTab = QWidget()
         self.tabs.resize(300, 200)
 
         # Add tabs
-        self.tabs.addTab(self.tab1, "Entrenamiento")
-        self.tabs.addTab(self.tab2, "Clasificación")
-        self.tabs.addTab(self.tab3, "Web scraping")
+        self.tabs.addTab(self.trainTab, "Entrenamiento")
+        self.tabs.addTab(self.classificationTab, "Clasificación")
+        self.tabs.addTab(self.webscrapingTab, "Web scraping")
 
         # Create first tab
-        self.tab1.layout = QVBoxLayout(self)
-        self.pushButton1 = QPushButton("PyQt5 button")
-        self.tab1.layout.addWidget(self.pushButton1)
-        self.tab1.setLayout(self.tab1.layout)
+        self.trainTab.layout = QVBoxLayout(self)
+        self.trainTab.setLayout(self.trainTab.layout)
+        self.trainTab.layout.addWidget(TabTraining.Training(self))
 
         # Add tabs to widget
         self.layout.addWidget(self.tabs)
