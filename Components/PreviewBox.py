@@ -11,8 +11,9 @@ class Preview(QWidget):
     def __init__(self, values, parent=None):
         super(Preview, self).__init__(parent)
 
-        self.values = values
+        self.setObjectName('previewBox')
 
+        self.values = values
         layout_preview = QVBoxLayout()
         layout = QGridLayout()
 
@@ -31,6 +32,7 @@ class Preview(QWidget):
         self.label_total = QLabel("Total: ".format(self.values[4]))
         self.chosen_algorithm = QLabel("Algoritmo seleccionado: {}".format(self.values[5]))
 
+
         layout.addWidget(self.titleLabel)
         layout.addWidget(self.label_A)
         layout.addWidget(self.label_B)
@@ -42,6 +44,8 @@ class Preview(QWidget):
 
         self.run_button = RunButton.RunButton(self)
         layout.addWidget(self.run_button, 5, 1)
+
+
 
     def UpdatePreviewValues(self, values):
         self.values = values

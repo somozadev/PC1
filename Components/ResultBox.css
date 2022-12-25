@@ -1,0 +1,11 @@
+
+QLabel#borderLabel{
+      color: cornflowerblue;
+      font-weight: 600;
+}QLabel#resultLabel{
+      color: #79a248;
+      font-weight: 600;
+}QLabel#totalLabel{
+      color: #b9b9b9;
+      font-weight: 600;
+}

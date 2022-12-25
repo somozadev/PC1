@@ -8,9 +8,7 @@ class Dialog(QWidget):
     def GetFilesAmount(self):
         return 0
     def __init__(self, textcategory, parent=None):
-        """
-        :type textcategory: str
-        """
+
         self.textCategory = textcategory
         super(Dialog, self).__init__(parent)
 
@@ -19,13 +17,16 @@ class Dialog(QWidget):
 
         self.fileLabel = QLabel("Textos categoría {}: ".format(self.textCategory))
         layout.addWidget(self.fileLabel, 0, 0)
-
+        layout.addItem(QSpacerItem(60,40, QSizePolicy.MinimumExpanding))
         self.textBox = QLineEdit("")
         layout.addWidget(self.textBox, 0, 1)
 
         self.getFilesButton = QPushButton("Abrir")
         self.getFilesButton.clicked.connect(self.getfile)
         layout.addWidget(self.getFilesButton, 0, 2)
+
+
+
 
     def getfile(self):
         filename = QFileDialog.getExistingDirectory(self, 'Seleccionar carpeta', self.textBox.text())
