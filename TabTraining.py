@@ -49,7 +49,7 @@ class Training(QWidget):
             layout.addWidget(self.result_box,6,0)
 
         #save file at (similar FileDialog)
-        self.file_save = FileDialogSave.Dialog(self)
+        self.file_save = FileDialogSave.Dialog('Guardar modelo')
         layout.addWidget(self.file_save, 7, 0)
         self.show()
 

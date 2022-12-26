@@ -6,13 +6,14 @@ from PyQt5.QtGui import *
 
 class Dialog(QWidget):
 
-    def __init__(self, parent=None):
+    def __init__(self, name, parent=None):
         super(Dialog, self).__init__(parent)
 
         layout = QGridLayout()
         self.setLayout(layout)
+        self.name = name
 
-        self.fileLabel = QLabel("Guardar modelo: ")
+        self.fileLabel = QLabel("{}: ".format(self.name))
         layout.addWidget(self.fileLabel, 0, 0)
 
         self.textBox = QLineEdit("")

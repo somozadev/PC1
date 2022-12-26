@@ -22,10 +22,15 @@ class TabsWidget(QWidget):
         self.tabs.addTab(self.classificationTab, "Clasificación")
         self.tabs.addTab(self.webscrapingTab, "Web scraping")
 
-        # Create first tab
+        # Training tab
         self.trainTab.layout = QVBoxLayout(self)
         self.trainTab.setLayout(self.trainTab.layout)
         self.trainTab.layout.addWidget(TabTraining.Training(self))
+
+        # Classification tab
+        self.classificationTab.layout = QVBoxLayout(self)
+        self.classificationTab.setLayout(self.classificationTab.layout)
+        self.classificationTab.layout.addWidget(TabClassification.Classification(self))
 
         # Add tabs to widget
         self.layout.addWidget(self.tabs)

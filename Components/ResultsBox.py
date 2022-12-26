@@ -5,7 +5,6 @@ from pathlib import Path
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-import Components.RunButton as RunButton
 
 
 class Result(QWidget):
@@ -107,8 +106,10 @@ class Result(QWidget):
         grid_layout_result.addWidget(self.label_TrueYes_classRecall,4,1)
         grid_layout_result.addWidget(self.label_TrueNo_classRecall,4,2)
 
-        self.setStyleSheet(Path('Components/ResultBox.css').read_text())
         layout.addLayout(grid_layout_result)
+
+
+
 
 
 

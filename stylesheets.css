@@ -5,6 +5,16 @@ QLabel{
       color: #464d55;
       font-weight: 600;
 }
+QLabel#borderLabel{
+      color: cornflowerblue;
+      font-weight: 600;
+}QLabel#resultLabel{
+      color: #79a248;
+      font-weight: 600;
+}QLabel#totalLabel{
+      color: #b9b9b9;
+      font-weight: 600;
+}
 QLineEdit{
     border: 1px solid #e0e4e7;
     border-radius: 8px;

@@ -26,9 +26,9 @@ class Preview(QWidget):
         self.titleLabel.setFont(self.titleFont)
 
         self.label_A = QLabel("Ejemplares Entrantes: {}".format(self.values[0]))
-        self.label_B = QLabel("Ejemplares Entrantes: {}".format(self.values[1]))
-        self.label_C = QLabel("Ejemplares Entrantes: {}".format(self.values[2]))
-        self.label_D = QLabel("Ejemplares Entrantes: {}".format(self.values[3]))
+        self.label_B = QLabel("Ejemplares Principales: {}".format(self.values[1]))
+        self.label_C = QLabel("Ejemplares Segundos: {}".format(self.values[2]))
+        self.label_D = QLabel("Ejemplares Postres: {}".format(self.values[3]))
         self.label_total = QLabel("Total: ".format(self.values[4]))
         self.chosen_algorithm = QLabel("Algoritmo seleccionado: {}".format(self.values[5]))
 
@@ -43,16 +43,16 @@ class Preview(QWidget):
 
 
         self.run_button = RunButton.RunButton(self)
-        layout.addWidget(self.run_button, 5, 1)
+        layout.addWidget(self.run_button, 8, 1)
 
 
 
     def UpdatePreviewValues(self, values):
         self.values = values
         self.label_A.setText("Ejemplares Entrantes: {}".format(self.values[0]))
-        self.label_B.setText("Ejemplares Entrantes: {}".format(self.values[1]))
-        self.label_C.setText("Ejemplares Entrantes: {}".format(self.values[2]))
-        self.label_D.setText("Ejemplares Entrantes: {}".format(self.values[3]))
+        self.label_B.setText("Ejemplares Principales: {}".format(self.values[1]))
+        self.label_C.setText("Ejemplares Segundos: {}".format(self.values[2]))
+        self.label_D.setText("Ejemplares Postres: {}".format(self.values[3]))
         self.label_total.setText("Total: ".format(self.values[4]))
         self.chosen_algorithm.setText("Algoritmo seleccionado: {}".format(self.values[5]))
 
