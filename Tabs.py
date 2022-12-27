@@ -32,6 +32,11 @@ class TabsWidget(QWidget):
         self.classificationTab.setLayout(self.classificationTab.layout)
         self.classificationTab.layout.addWidget(TabClassification.Classification(self))
 
+        # Webscraping tab
+        self.webscrapingTab.layout = QVBoxLayout(self)
+        self.webscrapingTab.setLayout(self.webscrapingTab.layout)
+        self.webscrapingTab.layout.addWidget(TabWebscraping.WebScraping(self))
+
         # Add tabs to widget
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)

@@ -15,6 +15,10 @@ QLabel#borderLabel{
       color: #b9b9b9;
       font-weight: 600;
 }
+QLabel#WebscrapingItemName{
+      color: #5c8ece;
+      font-weight: 800;
+}
 QLineEdit{
     border: 1px solid #e0e4e7;
     border-radius: 8px;
@@ -26,6 +30,17 @@ QLineEdit:focus  {
 }
 QLineEdit::placeholder {
   color: #767e89;
+}
+
+QListWidget{
+    border: 1px solid #e0e4e7;
+    border-radius: 8px;
+    min-height: 20px;
+}
+QListWidget QScrollBar{
+    max-width: 0px;
+    max-height: 0px;
+    background-color: rgba(255,255,255,0);
 }
 QPushButton{
       background-color: cornflowerblue;
