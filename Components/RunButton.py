@@ -18,3 +18,5 @@ class RunButton(QWidget):
 
     def Run(self):
         print("Running! ")
+        #llamar a la parte de IA de training
+        #kdjsgkldfg

@@ -43,6 +43,7 @@ class Preview(QWidget):
 
 
         self.run_button = RunButton.RunButton(self)
+
         layout.addWidget(self.run_button, 8, 1)
 
 

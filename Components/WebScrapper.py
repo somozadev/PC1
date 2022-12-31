@@ -91,5 +91,4 @@ class WebScrap(QWidget):
 
 
 
-
         print(len(results))
