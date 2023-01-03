@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
+import IA.ToDataset as ToDataset
+import IA.Stemming as Stemming
 
 class RunButton(QWidget):
 
@@ -19,4 +21,9 @@ class RunButton(QWidget):
     def Run(self):
         print("Running! ")
         #llamar a la parte de IA de training
-        #kdjsgkldfg
+
+        #paths
+
+
+        self.Stemming = Stemming()
+        
