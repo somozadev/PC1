@@ -4,6 +4,6 @@ class LowerToken():
     def __init__(self, parent=None):
         super(LowerToken, self).__init__(parent)
 
-    def lower_token(self, texto):
-        tokensA = RegexpTokenizer(r'\w+').tokenize(texto.lower())  # Tokenizar y pasar a minusculas el texto recibido
-        return tokensA
+    def ToLowerTokenize(self, text):
+        result = RegexpTokenizer(r'\w+').tokenize(text.lower())  # Tokenizar y pasar a minusculas el texto recibido
+        return result

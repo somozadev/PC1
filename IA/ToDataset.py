@@ -7,26 +7,26 @@ class ToDataset():
 
 
 #Devuelve el nombre de los archivos que hay en x ruta
-    def NombresArchivos(self, carpeta):
-        contenido = os.listdir(carpeta)
-        nombres = []
-        for fichero in contenido:
-            if os.path.isfile(os.path.join(carpeta, fichero)) and fichero.endswith('.txt'):
-                nombres.append(fichero)
-        return nombres
+    def FileNames(self, folder):
+        files = os.listdir(folder)
+        names = []
+        for file in files:
+            if os.path.isfile(os.path.join(folder, file)) and file.endswith('.txt'):
+                names.append(file)
+        return names
 
 #Crea un dataframe con los títulos y textos de las recetas de la categoría que se le especifíca
-    def GetDataFrame(self, ruta):
+    def GetDataFrame(self, path):
         df = pd.DataFrame()
-        entrantes = self.NombresArchivos(ruta)
-        df['Titulo'] = entrantes
+        entrances = self.FileNames(path)
+        df['Title'] = entrances
 
-        listaTextos = []
+        textList = []
         for i in range(len(df)):
-            with open(ruta + '/' + df.Titulo[i], "r") as f:
-                textoReceta = f.read()
-                listaTextos.append(textoReceta)
+            with open(path + '/' + df.Title[i], "r") as f:
+                textRecipe = f.read()
+                textList.append(textRecipe)
                 f.close()
-        df["Texto"] = listaTextos
+        df["Text"] = textList
         return df
 

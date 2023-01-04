@@ -7,8 +7,10 @@ from PyQt5.QtGui import *
 class Dialog(QWidget):
     def GetFilesAmount(self):
         return 0
-    def __init__(self, textcategory, parent=None):
-
+    def GetPath(self):
+        return self.textBox.text()
+    def __init__(self, Training, textcategory, parent=None):
+        self.Training = Training
         self.textCategory = textcategory
         super(Dialog, self).__init__(parent)
 
@@ -29,6 +31,15 @@ class Dialog(QWidget):
         filename = QFileDialog.getExistingDirectory(self, 'Seleccionar', self.textBox.text())
         if filename:
             self.textBox.setText(str(filename))
+            if self.textCategory == "Entrantes":
+                self.Training.OnPathUpdate_A()
+            elif self.textCategory == "Principales":
+                self.Training.OnPathUpdate_B()
+            elif self.textCategory == "Segundos":
+                self.Training.OnPathUpdate_C()
+            elif self.textCategory == "Postres":
+                self.Training.OnPathUpdate_D()
+
 
 class DialogClasifTexts(QWidget):
     def __init__(self, name, parent=None):

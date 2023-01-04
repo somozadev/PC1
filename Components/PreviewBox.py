@@ -8,12 +8,13 @@ import Components.RunButton as RunButton
 
 
 class Preview(QWidget):
-    def __init__(self, values, parent=None):
+    def __init__(self, values, paths, parent=None):
         super(Preview, self).__init__(parent)
 
         self.setObjectName('previewBox')
 
         self.values = values
+        self.paths = paths
         layout_preview = QVBoxLayout()
         layout = QGridLayout()
 
@@ -42,7 +43,7 @@ class Preview(QWidget):
         layout.addWidget(self.chosen_algorithm)
 
 
-        self.run_button = RunButton.RunButton(self)
+        self.run_button = RunButton.RunButton(self.paths)
 
         layout.addWidget(self.run_button, 8, 1)
 
