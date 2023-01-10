@@ -36,6 +36,7 @@ class Training(QWidget):
         self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
 
         self.paths = ['','','',''] #paths from the selectedd folders
+        self.paths = ['G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/entrantes','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/principal','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/segundos','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/postres'] #paths from the selectedd folders
         self.preview_box = PreviewBox.Preview(self.values, self.paths)
         self.OnDropdownUpdate()
         layout.addWidget(self.preview_box, 5, 0)
