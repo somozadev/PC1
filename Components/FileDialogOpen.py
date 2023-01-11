@@ -1,3 +1,4 @@
+import os
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -6,6 +7,11 @@ from PyQt5.QtGui import *
 
 class Dialog(QWidget):
     def GetFilesAmount(self):
+        if self.textBox.text() != '':
+            list = os.listdir(self.textBox.text())
+            number_files = len(list)
+            return number_files
+
         return 0
     def GetPath(self):
         return self.textBox.text()

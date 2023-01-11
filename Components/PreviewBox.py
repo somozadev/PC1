@@ -56,9 +56,11 @@ class Preview(QWidget):
         self.label_B.setText("Ejemplares Principales: {}".format(self.values[1]))
         self.label_C.setText("Ejemplares Segundos: {}".format(self.values[2]))
         self.label_D.setText("Ejemplares Postres: {}".format(self.values[3]))
-        self.label_total.setText("Total: ".format(self.values[4]))
-        self.chosen_algorithm.setText("Algoritmo seleccionado: {}".format(self.values[5]))
-        self.run_button.UpdateCurrentAlgorithm(self.values[5])
+        self.chosen_algorithm.setText("Algoritmo seleccionado: {}".format(self.values[4]))
+        self.run_button.UpdateCurrentAlgorithm(self.values[4])
+
+        total_files = int(self.values[0]) + int(self.values[1]) + int(self.values[2]) + int(self.values[3])
+        self.label_total.setText("Total: {}".format(total_files))
 
 
 

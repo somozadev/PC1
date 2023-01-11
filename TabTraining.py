@@ -54,15 +54,27 @@ class Training(QWidget):
         self.show()
 
     def OnDropdownUpdate(self):
-        total_files = self.file_browser_A.GetFilesAmount() + self.file_browser_B.GetFilesAmount() + self.file_browser_C.GetFilesAmount() + self.file_browser_D.GetFilesAmount()
-        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
+        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(),  self.dropdown_algorithms.GetCurrentAlgorithm()]
         self.preview_box.UpdatePreviewValues(self.values)
     def OnPathUpdate_A(self):
         self.paths[0] = self.file_browser_A.GetPath()
+        total_files = self.file_browser_A.GetFilesAmount() + self.file_browser_B.GetFilesAmount() + self.file_browser_C.GetFilesAmount() + self.file_browser_D.GetFilesAmount()
+        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
+        self.OnDropdownUpdate()
     def OnPathUpdate_B(self):
         self.paths[1] = self.file_browser_B.GetPath()
+        total_files = self.file_browser_A.GetFilesAmount() + self.file_browser_B.GetFilesAmount() + self.file_browser_C.GetFilesAmount() + self.file_browser_D.GetFilesAmount()
+        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
+        self.OnDropdownUpdate()
     def OnPathUpdate_C(self):
         self.paths[2] = self.file_browser_C.GetPath()
+        total_files = self.file_browser_A.GetFilesAmount() + self.file_browser_B.GetFilesAmount() + self.file_browser_C.GetFilesAmount() + self.file_browser_D.GetFilesAmount()
+        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
+        self.OnDropdownUpdate()
     def OnPathUpdate_D(self):
         self.paths[3] = self.file_browser_D.GetPath()
+        total_files = self.file_browser_A.GetFilesAmount() + self.file_browser_B.GetFilesAmount() + self.file_browser_C.GetFilesAmount() + self.file_browser_D.GetFilesAmount()
+        self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
+        self.OnDropdownUpdate()
+
 
