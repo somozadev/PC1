@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
+from IA.SaveTrainingModel import SaveTrainingModel
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
@@ -24,7 +25,6 @@ class Dialog(QWidget):
         layout.addWidget(self.getFilesButton, 0, 2)
 
     def savefile(self):
-        filename = QFileDialog.getSaveFileName(self, 'Guardar modelo', 'c:\\', "Text files (*.txt)")
-        file = open(filename, 'w')
-        #file.write(OUTPUTEDDATA)
-        file.close()
+        filename = QFileDialog.getSaveFileName(self, 'Guardar modelo', 'c:\\', "(*.pkl)")
+        filename
+        SaveTrainingModel.FinalSavingPathChosen(SaveTrainingModel, filename[0])

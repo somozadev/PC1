@@ -8,11 +8,12 @@ import Components.RunButton as RunButton
 
 
 class Preview(QWidget):
-    def __init__(self, values, paths, currentAlgorithm, parent=None):
+    def __init__(self, Training, values, paths, currentAlgorithm, parent=None):
         super(Preview, self).__init__(parent)
 
+        self.Training = Training
+        self.confusion_matrix = None
         self.setObjectName('previewBox')
-
         self.values = values
         self.paths = paths
         self.currentAlgorithm = currentAlgorithm
@@ -44,10 +45,9 @@ class Preview(QWidget):
         layout.addWidget(self.chosen_algorithm)
 
 
-        self.run_button = RunButton.RunButton(self.paths, self.currentAlgorithm)
+        self.run_button = RunButton.RunButton(self, self.paths, self.currentAlgorithm)
 
         layout.addWidget(self.run_button, 8, 1)
-
 
 
     def UpdatePreviewValues(self, values):
@@ -63,7 +63,10 @@ class Preview(QWidget):
         self.label_total.setText("Total: {}".format(total_files))
 
 
-
+    def PropagateConfusionMatrix(self, confusion_matrix):
+        self.confusion_matrix = confusion_matrix
+        self.Training.OnTrainingFinished(self.confusion_matrix)
+        
 
 
 

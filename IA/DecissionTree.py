@@ -7,6 +7,9 @@ import random
 
 class DecisionTree:
 
+    def __init__(self, runButton):
+        self.runButton = runButton
+        self.confussion_matrix = None
     def Train(self, docs):
         decision_tree = DecisionTreeClassifier()
         decision_tree.criterion ="gini"
@@ -14,30 +17,36 @@ class DecisionTree:
         decision_tree.random_state = 77
 
         X_train, X_test, Y_train, Y_test = GetSplits(docs)
-        vectorizer = TfidfVectorizer()
-        vectorizer.analyzer = 'word'
-        vectorizer.min_df = 3
+        self.vectorizer = TfidfVectorizer()
+        self.vectorizer.analyzer = 'word'
+        self.vectorizer.min_df = 3
 
-        matrix = vectorizer.fit_transform(X_train)
-        decision_tree_classifier = decision_tree.fit(matrix, Y_train)
-        Evaluate("Decision Tree \t TRAIN \t", decision_tree_classifier, vectorizer, X_train, Y_train)
-        Evaluate("Decision Tree \t TEST \t", decision_tree_classifier, vectorizer, X_test, Y_test)
-        SaveTrainingModel.Save(self, "DecisionTreeModel", "DecisionTreeVectorizer", vectorizer, decision_tree_classifier)
+        matrix = self.vectorizer.fit_transform(X_train)
+        self.classifier = decision_tree.fit(matrix, Y_train)
+        self.Evaluate("Decision Tree \t TEST \t", X_test, Y_test)
+        self.Evaluate("Decision Tree \t TRAIN \t", X_train, Y_train)
+        SaveTrainingModel.Save(self, "DecisionTreeModel", "DecisionTreeVectorizer", self.vectorizer, self.classifier)
 
-def Evaluate(title, classifier, vectorizer, X, Y):
-    X_tfidf = vectorizer.transform(X)
-    Y_pred = classifier.predict(X_tfidf)
+        self.runButton.GetConfusionMatrix()
 
-    confussion_matrix = confusion_matrix(Y, Y_pred)
-    print(confussion_matrix)
+    def GetConfusionMatrix(self):
+        return self.confussion_matrix
+    def Evaluate(self, title, X, Y):
+        X_tfidf = self.vectorizer.transform(X)
+        Y_pred = self.classifier.predict(X_tfidf)
 
-    clasification_report = classification_report(Y, Y_pred)
-    print(clasification_report)
+        self.confussion_matrix = confusion_matrix(Y, Y_pred)
+        print(self.confussion_matrix)
 
-    precision = precision_score(Y, Y_pred, average='micro')
-    recall = recall_score(Y, Y_pred, average='micro')
-    f1 = f1_score(Y, Y_pred, average='micro')
-    print("%s\t%f\t%f\t%f\n" % (title,precision,recall,f1))
+        clasification_report = classification_report(Y, Y_pred)
+        print(clasification_report)
+
+        precision = precision_score(Y, Y_pred, average='micro')
+        recall = recall_score(Y, Y_pred, average='micro')
+        f1 = f1_score(Y, Y_pred, average='micro')
+        print("%s\t%f\t%f\t%f\n" % (title, precision, recall, f1))
+
+
 def GetSplits(docs):
     random.shuffle(docs)
     X_train = []  # training docs

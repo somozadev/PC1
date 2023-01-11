@@ -4,6 +4,10 @@ import Components.FileDialogSave as FileDialogSave
 import Components.Dropdown as Dropdown
 import Components.PreviewBox as PreviewBox
 import Components.ResultsBox as ResultBox
+from IA.NaiveBayes import NaiveBayes
+from IA.DecissionTree import DecisionTree
+from IA.LinearSupportVector import LinearSupportVector
+from IA.StochasticGradientDescent import StochasticGradientDescent
 from pathlib import Path
 import sys
 
@@ -36,23 +40,25 @@ class Training(QWidget):
         self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(), total_files, self.dropdown_algorithms.GetCurrentAlgorithm()]
 
         self.paths = ['','','',''] #paths from the selectedd folders
-        self.paths = ['G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/entrantes','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/principal','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/segundos','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/postres'] #paths from the selectedd folders
-        self.preview_box = PreviewBox.Preview(self.values, self.paths,self.dropdown_algorithms.GetCurrentAlgorithm())
+        # self.paths = ['G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/entrantes','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/principal','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/segundos','G:/CARRERA/6ºCARRERA/PC1/PC1/ColeccionTextos/postres'] #paths from the selectedd folders
+        self.preview_box = PreviewBox.Preview(self, self.values, self.paths,self.dropdown_algorithms.GetCurrentAlgorithm())
         self.OnDropdownUpdate()
         layout.addWidget(self.preview_box, 5, 0)
 
         #result box
-        # self.values_rb = [0,0,0,0]
-        self.values_rb = [146,49,354,760]
-        if self.values_rb[0] != 0 and self.values_rb[1] != 0 and self.values_rb[2] != 0 and self.values_rb[3] != 0:
-            self.result_box = ResultBox.Result(self.values_rb)
-            layout.addWidget(self.result_box,6,0)
+        self.values_rb = [0,0,0,0]
+        # if self.values_rb[0] != 0 and self.values_rb[1] != 0 and self.values_rb[2] != 0 and self.values_rb[3] != 0:
+        self.result_box = ResultBox.Result(self.values_rb)
+        layout.addWidget(self.result_box,6,0)
 
         #save file at (similar FileDialog)
         self.file_save = FileDialogSave.Dialog('Guardar modelo')
         layout.addWidget(self.file_save, 7, 0)
         self.show()
 
+    def OnTrainingFinished(self, confusion_matrix):
+        self.values_rb = confusion_matrix
+        self.result_box.UpdatePreviewValues(self.values_rb)
     def OnDropdownUpdate(self):
         self.values = [self.file_browser_A.GetFilesAmount(), self.file_browser_B.GetFilesAmount(), self.file_browser_C.GetFilesAmount(), self.file_browser_D.GetFilesAmount(),  self.dropdown_algorithms.GetCurrentAlgorithm()]
         self.preview_box.UpdatePreviewValues(self.values)

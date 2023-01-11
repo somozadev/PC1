@@ -4,33 +4,42 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import precision_score,recall_score,f1_score, confusion_matrix, classification_report
 from IA.SaveTrainingModel import SaveTrainingModel
 class NaiveBayes:
+
+    def __init__(self, runButton):
+        self.runButton = runButton
+        self.confussion_matrix = None
     def Train(self, docs):
+        multinomial_naive_bayes =MultinomialNB()
+
         X_train, X_test, Y_train, Y_test = GetSplits(docs)
-        vectorizer = TfidfVectorizer()                                  #CountVectorizer() #crea un vectorizador para convertir cada doc a un vector
-        vectorizer.analyzer = 'word'                                    #should understand as separated words, and not chars or char_wb
-        vectorizer.min_df = 3                                           #ignore terms that have a document frequency strictly lower than the given threshold
+        self.vectorizer = TfidfVectorizer()                                  #CountVectorizer() #crea un vectorizador para convertir cada doc a un vector
+        self.vectorizer.analyzer = 'word'                                    #should understand as separated words, and not chars or char_wb
+        self.vectorizer.min_df = 3                                           #ignore terms that have a document frequency strictly lower than the given threshold
 
-        matrix = vectorizer.fit_transform(X_train)                      #convierte el vector en una matriz de términos
-        naive_bayes_classifier = MultinomialNB().fit(matrix, Y_train)   #multinomialNB es un clasificador para naive bayes especializado en word counts para clasificacion de texto, funciona con tfidf
-        Evaluate("Naive Bayes \t TRAIN \t", naive_bayes_classifier, vectorizer, X_train, Y_train)
-        Evaluate("Naive Bayes \t TEST \t", naive_bayes_classifier, vectorizer, X_test, Y_test)
-        SaveTrainingModel.Save(self,"NaiveBayesModel","NaiveBayesVectorizer",vectorizer,naive_bayes_classifier)
+        matrix = self.vectorizer.fit_transform(X_train)                      #convierte el vector en una matriz de términos
+        self.classifier =multinomial_naive_bayes.fit(matrix, Y_train)   #multinomialNB es un clasificador para naive bayes especializado en word counts para clasificacion de texto, funciona con tfidf
+        self.Evaluate("Naive Bayes \t TEST \t", X_test, Y_test)
+        self.Evaluate("Naive Bayes \t TRAIN \t", X_train, Y_train)
+        SaveTrainingModel.Save(SaveTrainingModel,"NaiveBayesModel","NaiveBayesVectorizer",self.vectorizer,self.classifier)
+        self.runButton.GetConfusionMatrix()
+    def GetConfusionMatrix(self):
+        return self.confussion_matrix
+    def Evaluate(self, title, X, Y):
+        X_tfidf = self.vectorizer.transform(X)
+        Y_pred = self.classifier.predict(X_tfidf)
+
+        self.confussion_matrix = confusion_matrix(Y, Y_pred)
+        print(self.confussion_matrix)
+
+        clasification_report = classification_report(Y, Y_pred)
+        print(clasification_report)
+
+        precision = precision_score(Y, Y_pred, average='micro')
+        recall = recall_score(Y, Y_pred, average='micro')
+        f1 = f1_score(Y, Y_pred, average='micro')
+        print("%s\t%f\t%f\t%f\n" % (title, precision, recall, f1))
 
 
-def Evaluate(title, classifier, vectorizer, X, Y):
-    X_tfidf = vectorizer.transform(X)
-    Y_pred = classifier.predict(X_tfidf)
-
-    confussion_matrix = confusion_matrix(Y, Y_pred)
-    print(confussion_matrix)
-
-    clasification_report = classification_report(Y, Y_pred)
-    print(clasification_report)
-
-    precision = precision_score(Y, Y_pred, average='micro')
-    recall = recall_score(Y, Y_pred, average='micro')
-    f1 = f1_score(Y, Y_pred, average='micro')
-    print("%s\t%f\t%f\t%f\n" % (title,precision,recall,f1))
 def GetSplits(docs):
     random.shuffle(docs)
     X_train = []                                                        #training docs
