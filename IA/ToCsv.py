@@ -7,7 +7,7 @@ class ToCsv(QWidget):
     #en base a los directorios seleccionados de las carpetas, genera un fichero CSV de todos ellos ordenándolos por categoría, nombre y cotnenido
     def GenerateCSV(self, name, paths, categories):
         with open('CSV/'+name+'.csv', 'w', encoding='utf8') as outfile:
-            outfile.write('%s\t%s\t%s\n' % ('label', 'name', 'recipe'))
+            # outfile.write('%s\t%s\t%s\n' % ('label', 'name', 'recipe'))
             for i in range(len(paths)):
                 path = paths[i]
                 label = categories[i]

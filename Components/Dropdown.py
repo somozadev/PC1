@@ -23,6 +23,6 @@ class Dropdown(QWidget):
         layout.addWidget(self.textLabel, 0, 0)
 
         self.dropdown = QComboBox()
-        self.dropdown.addItems(['Suport Vector', 'Naive Bayes', 'K-NN', 'Decision Tree', 'Logistic Recession', 'Random Forest'])
+        self.dropdown.addItems(['Naive Bayes','Decision Tree', 'Linear Support Vector', 'Stochastic Gradient Descent'])
         self.dropdown.currentTextChanged.connect(self.UpdateCurrentAlgorithm)
         layout.addWidget(self.dropdown, 0, 1)

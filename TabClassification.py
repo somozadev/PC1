@@ -27,7 +27,9 @@ class Classification(QWidget):
         layout.addWidget(self.results,2, 0)
 
         #summary and execute classification
-        self.summary = ClassificationSummary.Summary(self)
+        self.paths = ['G:/CARRERA/6ºCARRERA/PC1/PC1/textosPreciddion/entrantes','G:/CARRERA/6ºCARRERA/PC1/PC1/NaiveBayesModel','G:/CARRERA/6ºCARRERA/PC1/PC1/NaiveBayesVectorizer']  # paths from the selectedd folders
+
+        self.summary = ClassificationSummary.Summary(self.paths)
         layout.addWidget(self.summary, 3, 0)
 
 

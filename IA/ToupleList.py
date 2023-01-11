@@ -1,13 +1,9 @@
-import os
-from PyQt5.QtWidgets import *
 from collections import defaultdict
 from nltk import FreqDist
-from IA.StopWords import StopWords
-from IA.Tokenizer import Tokenizer
-from IA.TextPreparation import TextPreparation
-class ToToupleList(QWidget):
-    def __init__(self, parent=None):
-        super(ToToupleList, self).__init__(parent)
+from IA.PLN.StopWords import StopWords
+from IA.PLN.Tokenizer import Tokenizer
+from IA.PLN.TextPreparation import TextPreparation
+class ToupleList:
 
     #lee el csv generado y crea una lista de tuplas con la categoría y el contenido de cada receta
     def GenerateToupleList(self, name):
@@ -36,4 +32,3 @@ class ToToupleList(QWidget):
             print(category_label)
             frequency_distance = FreqDist(category_tokens)
             print(frequency_distance.most_common(20))
-

@@ -8,13 +8,14 @@ import Components.RunButton as RunButton
 
 
 class Preview(QWidget):
-    def __init__(self, values, paths, parent=None):
+    def __init__(self, values, paths, currentAlgorithm, parent=None):
         super(Preview, self).__init__(parent)
 
         self.setObjectName('previewBox')
 
         self.values = values
         self.paths = paths
+        self.currentAlgorithm = currentAlgorithm
         layout_preview = QVBoxLayout()
         layout = QGridLayout()
 
@@ -43,7 +44,7 @@ class Preview(QWidget):
         layout.addWidget(self.chosen_algorithm)
 
 
-        self.run_button = RunButton.RunButton(self.paths)
+        self.run_button = RunButton.RunButton(self.paths, self.currentAlgorithm)
 
         layout.addWidget(self.run_button, 8, 1)
 
@@ -57,6 +58,7 @@ class Preview(QWidget):
         self.label_D.setText("Ejemplares Postres: {}".format(self.values[3]))
         self.label_total.setText("Total: ".format(self.values[4]))
         self.chosen_algorithm.setText("Algoritmo seleccionado: {}".format(self.values[5]))
+        self.run_button.UpdateCurrentAlgorithm(self.values[5])
 
 
 
