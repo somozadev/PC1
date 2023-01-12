@@ -41,6 +41,7 @@ class TabsWidget(QWidget):
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
 
+
     @pyqtSlot()
     def on_click(self):
         print("\n")

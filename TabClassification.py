@@ -15,30 +15,51 @@ class Classification(QWidget):
 
 
         #select folder text to short and folder model
-        self.file_browser_texts = FileDialogOpen.DialogClasifTexts('Textos a clasificar')
-        self.file_browser_model = FileDialogOpen.DialogClasifModel('Modelo clasificador')
+        self.file_browser_texts = FileDialogOpen.DialogClasifTexts(self,'Textos a clasificar')
+        self.file_browser_model = FileDialogOpen.DialogClasifModel(self,'Modelo clasificador')
         layout.addWidget(self.file_browser_texts, 0, 0)
         layout.addWidget(self.file_browser_model, 1, 0)
 
 
         #show the results
         self.selected_texts_path = "G:/CARRERA/Docs/"
-        self.results = ClassificationResults.Results("rtest",self.selected_texts_path)
+        self.results = ClassificationResults.Results(self, self.selected_texts_path)
         layout.addWidget(self.results,2, 0)
 
         #summary and execute classification
-        self.paths = ['G:/CARRERA/6ºCARRERA/PC1/PC1/textosPreciddion/entrantes','G:/CARRERA/6ºCARRERA/PC1/PC1/NaiveBayesModel','G:/CARRERA/6ºCARRERA/PC1/PC1/NaiveBayesVectorizer']  # paths from the selectedd folders
+        # self.paths = ['G:/CARRERA/6ºCARRERA/PC1/PC1/textosPreciddion/entrantes','G:/CARRERA/6ºCARRERA/PC1/PC1/NaiveBayesModel','G:/CARRERA/6ºCARRERA/PC1/PC1/NaiveBayesVectorizer']  # paths from the selectedd folders
+        self.paths = ['','','']
 
-        self.summary = ClassificationSummary.Summary(self.paths)
+        self.summary = ClassificationSummary.Summary(self, self.paths)
         layout.addWidget(self.summary, 3, 0)
 
 
-
+        self.tempPath = ""
+        self.tempfile = None
         #save file at (similar FileDialog)
-        self.file_save = FileDialogSave.Dialog('Guardar textos')
+
+        self.file_save = FileDialogSave.DialogTexts('Guardar textos', self.tempPath, self.tempfile)
         layout.addWidget(self.file_save, 4, 0)
         self.show()
 
-    def OnSelectedText(self):
-        return 0
 
+    def FinishedTesting(self):
+        self.selected_texts_path = self.summary.GetTempPath()
+        self.tempPath = self.selected_texts_path
+        self.tempfile = self.summary.GetTempFile()
+        self.results.DisplayWhenExecuteTest(self.selected_texts_path)
+        self.file_save.UpdateTempVars(self.tempPath, self.tempfile)
+
+    def FinishedDisplayTexts(self):
+        self.summary.UpdatePreviewAmountTexts()
+    def OnPathUpdate_Texts(self):
+        self.paths[0] = self.file_browser_texts.GetPath()
+        print(self.paths)
+
+    def OnPathUpdate_Model(self):
+        self.paths[1] = self.file_browser_model.GetPath()
+        aux = self.file_browser_model.GetPath()
+        aux = aux[:-4]
+        aux += "_vector.pkl"
+        self.paths[2] = aux
+        print(self.paths)

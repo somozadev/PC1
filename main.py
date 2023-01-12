@@ -1,3 +1,4 @@
+import tempfile
 from pathlib import Path
 
 import Tabs
@@ -6,7 +7,7 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-
+import tempfile
 
 
 class window(QMainWindow):
@@ -27,6 +28,7 @@ def main():
    ex = window()
    ex.show()
    sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
    main()

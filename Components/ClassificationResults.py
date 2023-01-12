@@ -3,58 +3,106 @@ import os
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+import subprocess
 from PyQt5.QtCore import Qt
 
 
 class Results(QWidget):
 
-    def __init__(self, name, pathTexts, parent=None):
+    def __init__(self,Test, pathTexts, parent=None):
         super(Results, self).__init__(parent)
 
-        layout = QGridLayout()
-        self.setLayout(layout)
-        self.name = name
+        self.filename = None
+        self.Test = Test
+        self.layout = QVBoxLayout()
         self.pathTexts = pathTexts
-        layout.setAlignment(Qt.AlignVCenter)
+        self.layout.setAlignment(Qt.AlignHCenter)
 
-        self.label_text_title = QLabel("Texto")
-        self.label_category_title = QLabel("Categoría")
-        self.label_view_title = QLabel("Ver Texto")
+        self.h_layout = QHBoxLayout()
+        self.h_layout.setAlignment(Qt.AlignHCenter)
+        self.v_layout_temp = QVBoxLayout()
+        self.box_group = QGroupBox()
+        self.scroll_area = QScrollArea()
+
+
+        self.label_text_title = QLabel("\t Texto")
+        self.label_category_title = QLabel("\t\t Categoría")
+        self.label_view_title = QLabel("\t\t Ver Texto")
+        self.label_text_title.setFixedSize(300,25)
+        self.label_view_title.setFixedSize(300,25)
+        self.label_category_title.setFixedSize(300,25)
         self.label_text_title.setObjectName("borderLabel")
         self.label_category_title.setObjectName("borderLabel")
         self.label_view_title.setObjectName("borderLabel")
-        layout.addWidget(self.label_text_title, 0, 0)
-        layout.addWidget(self.label_category_title, 0, 1)
-        layout.addWidget(self.label_view_title, 0, 2)
 
+        self.h_layout.addWidget(self.label_text_title)
+        self.h_layout.addWidget(self.label_category_title)
+        self.h_layout.addWidget(self.label_view_title)
+
+        self.layout.addLayout(self.h_layout)
+
+        self.setLayout(self.layout)
+
+
+
+
+    def DisplayWhenExecuteTest(self, temppath):
+
+        self.pathTexts = temppath
         count = 0
         arrayNames = []
-        for path in os.listdir(self.pathTexts):
-            if os.path.isfile(os.path.join(self.pathTexts, path)):
-                print(os.path.basename(os.path.join(self.pathTexts, path)))
-                arrayNames.append(os.path.basename(os.path.join(self.pathTexts, path)))
-                count += 1
 
-        excelCounter = 0
-        x = 1
+
+
+        for dir in os.listdir(self.pathTexts):
+            for path in os.listdir(os.path.join(self.pathTexts, dir)):
+                if os.path.isfile(os.path.join(self.pathTexts, dir, path)):
+                    fullpath = os.path.join(self.pathTexts, dir)
+                    fullpath+= '\\{}'.format(path)
+                    arrayNames.append((os.path.basename(os.path.join(self.pathTexts, path)), dir, fullpath)) #saves file path + its category
+                    count += 1
+
+
+
         for i in range(count):
-            if excelCounter >= 3:
-                x += 1
-                excelCounter = 0
-            self.addLableToResults(layout, x, excelCounter, arrayNames[i][0:3])
-            excelCounter += 1
+            self.AddLableToResults(arrayNames[i])
+
+        self.box_group.setLayout(self.v_layout_temp)
+        self.scroll_area.setWidget(self.box_group)
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setFixedHeight(250)
+        self.scroll_area.setFixedWidth(900)
+
+        self.layout.addWidget(self.scroll_area)
+        self.setLayout(self.layout)
+
+        self.Test.FinishedDisplayTexts()
+
+    def OpenFile(self, filename):
+        print(filename)
+        subprocess.Popen([filename[2]], shell = True)
 
 
+    def AddLableToResults(self, fileName):
+        self.filename = fileName
+        self.label_name = QLabel(fileName[0])
+        self.label_name.setObjectName("totalLabel")
+        self.label_category = QLabel(fileName[1])
+        self.label_category.setObjectName("totalLabel")
 
+        self.view_button = QPushButton("Ver")
+        self.view_button.setObjectName("resultLabel")
+        self.view_button.clicked.connect(lambda state, x=fileName: self.OpenFile(x))
+        self.label_name.setFixedSize(300,25)
+        self.label_category.setFixedSize(300,25)
+        self.view_button.setFixedSize(200,25)
 
-    def addLableToResults(self, layout, x, y, fileName):
+        self.label_category.setAlignment(Qt.AlignHCenter)
 
-        if y >= 2:
-            self.label = QLabel("Ver")
-            self.label.setObjectName("resultLabel")
-        else:
-            self.label = QLabel(fileName)
-            self.label.setObjectName("totalLabel")
+        self.h_layout = QHBoxLayout()
+        self.h_layout.setAlignment(Qt.AlignHCenter)
+        self.h_layout.addWidget(self.label_name)
+        self.h_layout.addWidget(self.label_category)
+        self.h_layout.addWidget(self.view_button)
 
-
-        layout.addWidget(self.label, x, y);
+        self.v_layout_temp.addLayout(self.h_layout)

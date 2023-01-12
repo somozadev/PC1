@@ -41,3 +41,17 @@ class Pie(QWidget):
         self.setFixedSize(QtCore.QSize(350, 350))
 
         layout.addWidget(self.chartview)#,0,0
+
+    def UpdateValues(self, values):
+        self.chart.removeAllSeries()
+        self.series = QPieSeries()
+        for value in values:
+            self.series.append(value[0], value[1])
+        self.chart.addSeries(self.series)
+        for slice in self.series.slices():
+            slice.setLabel("{:.2f}%".format(100 * slice.percentage()))
+        i = 0
+        for value in values:
+            self.chart.legend().markers(self.series)[i].setLabel(value[0])
+            i+=1
+

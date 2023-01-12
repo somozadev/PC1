@@ -48,8 +48,9 @@ class Dialog(QWidget):
 
 
 class DialogClasifTexts(QWidget):
-    def __init__(self, name, parent=None):
+    def __init__(self, Test, name, parent=None):
         self.name = name
+        self.Test = Test
         super(DialogClasifTexts, self).__init__(parent)
 
         layout = QGridLayout()
@@ -65,14 +66,17 @@ class DialogClasifTexts(QWidget):
         self.getFilesButton.clicked.connect(self.getfile)
         layout.addWidget(self.getFilesButton, 0, 2)
 
+    def GetPath(self):
+        return self.textBox.text()
     def getfile(self):
         filename = QFileDialog.getExistingDirectory(self, 'Seleccionar', self.textBox.text())
         if filename:
             self.textBox.setText(str(filename))
-
+            self.Test.OnPathUpdate_Texts()
 class DialogClasifModel(QWidget):
-    def __init__(self, name, parent=None):
+    def __init__(self,Test, name, parent=None):
         self.name = name
+        self.Test = Test
         super(DialogClasifModel, self).__init__(parent)
 
         layout = QGridLayout()
@@ -85,10 +89,12 @@ class DialogClasifModel(QWidget):
         layout.addWidget(self.textBox, 0, 1)
 
         self.getFilesButton = QPushButton("Seleccionar")
-        self.getFilesButton.clicked.connect(self.getfileNoFolder)
+        self.getFilesButton.clicked.connect(self.getfile)
         layout.addWidget(self.getFilesButton, 0, 2)
-
-    def getfileNoFolder(self):
+    def GetPath(self):
+        return self.textBox.text()
+    def getfile(self):
         filename = QFileDialog.getOpenFileName(self, 'Abrir modelo', 'c:\\', "All files(*.*)")  # Text files (*.txt)
         if filename:
             self.textBox.setText(str(filename[0]))
+            self.Test.OnPathUpdate_Model()
