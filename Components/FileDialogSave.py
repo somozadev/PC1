@@ -17,8 +17,8 @@ class Dialog(QWidget):
         self.fileLabel = QLabel("{}: ".format(self.name))
         layout.addWidget(self.fileLabel, 0, 0)
 
-        # self.textBox = QLineEdit("")
-        # layout.addWidget(self.textBox, 0, 1)
+        self.textBox = QLineEdit("")
+        layout.addWidget(self.textBox, 0, 1)
 
         self.getFilesButton = QPushButton("Guardar")
         self.getFilesButton.clicked.connect(self.savefile)
@@ -27,7 +27,7 @@ class Dialog(QWidget):
     def savefile(self):
         filename = QFileDialog.getSaveFileName(self, 'Guardar modelo', 'c:\\', "(*.pkl)")
         SaveTrainingModel.FinalSavingPathChosen(SaveTrainingModel, filename[0])
-        # self.textBox.setText(str(filename[0]))
+        self.textBox.setText(str(filename[0]))
 
 
 class DialogTexts(QWidget):

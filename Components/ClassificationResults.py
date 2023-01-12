@@ -45,6 +45,9 @@ class Results(QWidget):
 
     def DisplayWhenExecuteTest(self, temppath):
 
+        layout = self.parent().layout
+
+
         self.pathTexts = temppath
         count = 0
         arrayNames = []
@@ -61,6 +64,13 @@ class Results(QWidget):
 
 
 
+        index = self.v_layout_temp.count()
+        for index in reversed(range(self.v_layout_temp.count())):
+            item = self.v_layout_temp.itemAt(index)
+            myWidget = item.widget()
+            myWidget.Delete()
+            index -= 1
+
         for i in range(count):
             self.AddLableToResults(arrayNames[i])
 
@@ -75,12 +85,17 @@ class Results(QWidget):
 
         self.Test.FinishedDisplayTexts()
 
-    def OpenFile(self, filename):
-        print(filename)
-        subprocess.Popen([filename[2]], shell = True)
 
 
     def AddLableToResults(self, fileName):
+        element = DeleterScrollerWidget(fileName)
+        self.v_layout_temp.addWidget(element)
+    def GetTvLayout(self):
+        return self.v_layout_temp
+
+class DeleterScrollerWidget(QWidget):
+    def __init__(self, fileName):
+        super().__init__()
         self.filename = fileName
         self.label_name = QLabel(fileName[0])
         self.label_name.setObjectName("totalLabel")
@@ -90,9 +105,9 @@ class Results(QWidget):
         self.view_button = QPushButton("Ver")
         self.view_button.setObjectName("resultLabel")
         self.view_button.clicked.connect(lambda state, x=fileName: self.OpenFile(x))
-        self.label_name.setFixedSize(300,25)
-        self.label_category.setFixedSize(300,25)
-        self.view_button.setFixedSize(200,25)
+        self.label_name.setFixedSize(300, 25)
+        self.label_category.setFixedSize(300, 25)
+        self.view_button.setFixedSize(200, 25)
 
         self.label_category.setAlignment(Qt.AlignHCenter)
 
@@ -101,5 +116,13 @@ class Results(QWidget):
         self.h_layout.addWidget(self.label_name)
         self.h_layout.addWidget(self.label_category)
         self.h_layout.addWidget(self.view_button)
+        self.setLayout(self.h_layout)
+    def OpenFile(self, filename):
+        print(filename)
+        subprocess.Popen([filename[2]], shell = True)
 
-        self.v_layout_temp.addLayout(self.h_layout)
+    def Delete(self):
+        parent_layout = self.parent().layout()
+        parent_layout.removeWidget(self)
+        self.deleteLater()
+        del self
