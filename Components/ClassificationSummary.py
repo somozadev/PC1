@@ -1,4 +1,3 @@
-import sys
 import os
 import Components.PieChart as PieChart
 from IA.LoadTrainingModel import LoadTrainingModel
@@ -6,7 +5,6 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 import tempfile
 import shutil
-import pickle
 
 class Summary(QWidget):
 

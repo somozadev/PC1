@@ -1,9 +1,6 @@
 from PyQt5.QtWidgets import *
-import Components.FileDialogOpen as FileDialogOpen
-import Components.FileDialogSave as FileDialogSave
 import Components.WebScrapper as ws
-from pathlib import Path
-import sys
+
 
 
 class WebScraping(QWidget):

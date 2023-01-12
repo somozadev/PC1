@@ -1,7 +1,5 @@
 import requests
 import webbrowser
-
-from PyQt5 import QtCore
 from bs4 import BeautifulSoup
 from PyQt5.QtWidgets import *
 

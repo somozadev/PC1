@@ -1,13 +1,9 @@
-import tempfile
+import os
 from pathlib import Path
-
 import Tabs
-
 import sys
-from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import tempfile
 
 
 class window(QMainWindow):
@@ -22,9 +18,18 @@ class window(QMainWindow):
       self.setCentralWidget(self.tabs_widget)
 
 
+def resource_path(relative):
+   return os.path.join(
+      os.environ.get(
+         "_MEIPASS2",
+         os.path.abspath(".")
+      ),
+      relative
+   )
 def main():
    app = QApplication(sys.argv)
-   app.setStyleSheet(Path('stylesheets.css').read_text())
+
+   app.setStyleSheet(Path(resource_path("stylesheets.css")).read_text())
    ex = window()
    ex.show()
    sys.exit(app.exec_())

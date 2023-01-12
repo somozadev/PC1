@@ -70,7 +70,7 @@ class RunButton(QWidget):
             self.UpdatePreviewBox()
 
         elif self.currentAlgorithm == "Decision Tree":
-            self.confusion_matrix = self.training_algorithm_dt.GetConfusionMatrix()
+            self.confusion_matrix = self.training_algorithm_dt.GetConfusionMatrix() ##self.confusion matrix es none
             self.UpdatePreviewBox()
 
         elif self.currentAlgorithm == "Random Forest":

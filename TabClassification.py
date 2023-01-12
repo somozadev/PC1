@@ -3,7 +3,6 @@ import Components.FileDialogOpen as FileDialogOpen
 import Components.FileDialogSave as FileDialogSave
 import Components.ClassificationResults as ClassificationResults
 import Components.ClassificationSummary as ClassificationSummary
-import Components.PieChart as PieChart
 
 
 class Classification(QWidget):

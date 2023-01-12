@@ -1,9 +1,8 @@
 from PyQt5 import QtCore, QtChart
 from PyQt5.QtChart import QChart, QChartView, QPieSeries
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QColor
+from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import *
-from ipywidgets import Color
 
 
 class Pie(QWidget):

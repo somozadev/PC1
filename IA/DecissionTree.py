@@ -1,7 +1,7 @@
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import precision_score,recall_score,f1_score, confusion_matrix, classification_report
 from IA.SaveTrainingModel import SaveTrainingModel
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 import random
 
 
@@ -25,7 +25,7 @@ class DecisionTree:
         self.classifier = decision_tree.fit(matrix, Y_train)
         self.Evaluate("Decision Tree \t TEST \t", X_test, Y_test)
         self.Evaluate("Decision Tree \t TRAIN \t", X_train, Y_train)
-        SaveTrainingModel.Save(self, "DecisionTreeModel", "DecisionTreeVectorizer", self.vectorizer, self.classifier)
+        SaveTrainingModel.Save(SaveTrainingModel, "DecisionTreeModel", "DecisionTreeVectorizer", self.vectorizer, self.classifier)
 
         self.runButton.GetConfusionMatrix()
 

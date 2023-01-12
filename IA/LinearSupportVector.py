@@ -1,7 +1,7 @@
 from sklearn.svm import LinearSVC
 from sklearn.metrics import precision_score,recall_score,f1_score, confusion_matrix, classification_report
 from IA.SaveTrainingModel import SaveTrainingModel
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import  TfidfVectorizer
 import random
 
 class LinearSupportVector:
@@ -20,7 +20,7 @@ class LinearSupportVector:
         self.classifier = linear_svc.fit(matrix, Y_train)
         self.Evaluate("Linear Support Vector \t TEST \t", X_test, Y_test)
         self.Evaluate("Linear Support Vector \t TRAIN \t", X_train, Y_train)
-        SaveTrainingModel.Save(self, "LinearSVCModel", "LinearSVCVectorizer", self.vectorizer, self.classifier)
+        SaveTrainingModel.Save(SaveTrainingModel, "LinearSVCModel", "LinearSVCVectorizer", self.vectorizer, self.classifier)
         self.runButton.GetConfusionMatrix()
     def GetConfusionMatrix(self):
         return self.confussion_matrix

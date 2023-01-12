@@ -4,13 +4,6 @@ import Components.FileDialogSave as FileDialogSave
 import Components.Dropdown as Dropdown
 import Components.PreviewBox as PreviewBox
 import Components.ResultsBox as ResultBox
-from IA.NaiveBayes import NaiveBayes
-from IA.DecissionTree import DecisionTree
-from IA.LinearSupportVector import LinearSupportVector
-from IA.StochasticGradientDescent import StochasticGradientDescent
-from pathlib import Path
-import sys
-
 
 class Training(QWidget):
     def __init__(self, parent=None):

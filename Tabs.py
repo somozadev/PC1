@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QPushButton, QWidget, QTabWidget, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout
 from PyQt5.QtCore import pyqtSlot
 import TabTraining
 import TabClassification

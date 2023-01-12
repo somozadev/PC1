@@ -32,7 +32,7 @@ class SaveTrainingModel:
     def FinalSavingPathChosen(self, finalpath):
         finalpathVector = finalpath[:-4]
         finalpathVector+= "_vector.pkl"
+        self.tempfileModel
+        self.tempfileVector
         shutil.move(self.tempfileModel, finalpath)
         shutil.move(self.tempfileVector, finalpathVector)
-
-        self.tempfile.cleanup()

@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import precision_score,recall_score,f1_score, confusion_matrix, classification_report
 from IA.SaveTrainingModel import SaveTrainingModel
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import  TfidfVectorizer
 import random
 
 
