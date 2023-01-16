@@ -21,7 +21,7 @@ class StochasticGradientDescent:
 
         matrix = self.vectorizer.fit_transform(X_train)
         self.classifier = sgd.fit(matrix, Y_train)
-        self.Evaluate("Stochastic Gradient Descent \t TEST \t",  X_test, Y_test)
+        # self.Evaluate("Stochastic Gradient Descent \t TEST \t",  X_test, Y_test)
         self.Evaluate("Stochastic Gradient Descent \t TRAIN \t", X_train, Y_train)
         SaveTrainingModel.Save(SaveTrainingModel, "StochasticGradientDescentModel", "StochasticGradientDescentVectorizer",self.vectorizer, self.classifier)
         self.runButton.GetConfusionMatrix()
@@ -46,20 +46,20 @@ class StochasticGradientDescent:
 
 def GetSplits(docs):
     random.shuffle(docs)
-    X_train = []
-    Y_train = []
+    X_train = []  # training docs
+    Y_train = []  # corresponding training labels
 
-    X_test = []
-    Y_test = []
+    X_test = []  # test docs
+    Y_test = []  # corresponding test labels
 
-    pivot = int(.80 * len(docs))
+    # pivot = int(.80 * len(docs))  # get 80% of the docs for train
 
-    for i in range(0, pivot):
+    for i in range(0, 1):
         X_train.append(docs[i][1])
         Y_train.append(docs[i][0])
 
-    for i in range(pivot, len(docs)):
-        X_test.append(docs[i][1])
-        Y_test.append(docs[i][0])
+    # for i in range(1, len(docs)):
+    #     X_test.append(docs[i][1])
+    #     Y_test.append(docs[i][0])
 
     return X_train, X_test, Y_train, Y_test

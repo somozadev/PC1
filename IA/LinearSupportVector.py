@@ -18,7 +18,7 @@ class LinearSupportVector:
         matrix = self.vectorizer.fit_transform(X_train) #convierte el vector en una matriz de términos
 
         self.classifier = linear_svc.fit(matrix, Y_train)
-        self.Evaluate("Linear Support Vector \t TEST \t", X_test, Y_test)
+        # self.Evaluate("Linear Support Vector \t TEST \t", X_test, Y_test)
         self.Evaluate("Linear Support Vector \t TRAIN \t", X_train, Y_train)
         SaveTrainingModel.Save(SaveTrainingModel, "LinearSVCModel", "LinearSVCVectorizer", self.vectorizer, self.classifier)
         self.runButton.GetConfusionMatrix()
@@ -40,22 +40,23 @@ class LinearSupportVector:
         print("%s\t%f\t%f\t%f\n" % (title, precision, recall, f1))
 
 
+
 def GetSplits(docs):
     random.shuffle(docs)
-    X_train = []                                                        #training docs
-    Y_train = []                                                        #corresponding training labels
+    X_train = []  # training docs
+    Y_train = []  # corresponding training labels
 
-    X_test = []                                                         #test docs
-    Y_test = []                                                         #corresponding test labels
+    X_test = []  # test docs
+    Y_test = []  # corresponding test labels
 
-    pivot = int(.80 * len(docs))                                        #get 80% of the docs for train
+    # pivot = int(.80 * len(docs))  # get 80% of the docs for train
 
-    for i in range(0,pivot):
+    for i in range(0, 1):
         X_train.append(docs[i][1])
         Y_train.append(docs[i][0])
 
-    for i in range(pivot, len(docs)):
-        X_test.append(docs[i][1])
-        Y_test.append(docs[i][0])
+    # for i in range(1, len(docs)):
+    #     X_test.append(docs[i][1])
+    #     Y_test.append(docs[i][0])
 
-    return X_train,X_test,Y_train,Y_test
+    return X_train, X_test, Y_train, Y_test

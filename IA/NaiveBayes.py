@@ -18,7 +18,7 @@ class NaiveBayes:
 
         matrix = self.vectorizer.fit_transform(X_train)                      #convierte el vector en una matriz de términos
         self.classifier =multinomial_naive_bayes.fit(matrix, Y_train)   #multinomialNB es un clasificador para naive bayes especializado en word counts para clasificacion de texto, funciona con tfidf
-        self.Evaluate("Naive Bayes \t TEST \t", X_test, Y_test)
+        # self.Evaluate("Naive Bayes \t TEST \t", X_test, Y_test)
         self.Evaluate("Naive Bayes \t TRAIN \t", X_train, Y_train)
         SaveTrainingModel.Save(SaveTrainingModel,"NaiveBayesModel","NaiveBayesVectorizer",self.vectorizer,self.classifier)
         self.runButton.GetConfusionMatrix()
@@ -42,20 +42,20 @@ class NaiveBayes:
 
 def GetSplits(docs):
     random.shuffle(docs)
-    X_train = []                                                        #training docs
-    Y_train = []                                                        #corresponding training labels
+    X_train = []  # training docs
+    Y_train = []  # corresponding training labels
 
-    X_test = []                                                         #test docs
-    Y_test = []                                                         #corresponding test labels
+    X_test = []  # test docs
+    Y_test = []  # corresponding test labels
 
-    pivot = int(.80 * len(docs))                                        #get 80% of the docs for train
+    # pivot = int(.80 * len(docs))  # get 80% of the docs for train
 
-    for i in range(0,pivot):
+    for i in range(0, 1):
         X_train.append(docs[i][1])
         Y_train.append(docs[i][0])
 
-    for i in range(pivot, len(docs)):
-        X_test.append(docs[i][1])
-        Y_test.append(docs[i][0])
+    # for i in range(1, len(docs)):
+    #     X_test.append(docs[i][1])
+    #     Y_test.append(docs[i][0])
 
-    return X_train,X_test,Y_train,Y_test
+    return X_train, X_test, Y_train, Y_test

@@ -23,7 +23,7 @@ class DecisionTree:
 
         matrix = self.vectorizer.fit_transform(X_train)
         self.classifier = decision_tree.fit(matrix, Y_train)
-        self.Evaluate("Decision Tree \t TEST \t", X_test, Y_test)
+        # self.Evaluate("Decision Tree \t TEST \t", X_test, Y_test)
         self.Evaluate("Decision Tree \t TRAIN \t", X_train, Y_train)
         SaveTrainingModel.Save(SaveTrainingModel, "DecisionTreeModel", "DecisionTreeVectorizer", self.vectorizer, self.classifier)
 
@@ -55,14 +55,14 @@ def GetSplits(docs):
     X_test = []  # test docs
     Y_test = []  # corresponding test labels
 
-    pivot = int(.80 * len(docs))  # get 80% of the docs for train
+    # pivot = int(.80 * len(docs))  # get 80% of the docs for train
 
-    for i in range(0, pivot):
+    for i in range(0, 1):
         X_train.append(docs[i][1])
         Y_train.append(docs[i][0])
 
-    for i in range(pivot, len(docs)):
-        X_test.append(docs[i][1])
-        Y_test.append(docs[i][0])
+    # for i in range(1, len(docs)):
+    #     X_test.append(docs[i][1])
+    #     Y_test.append(docs[i][0])
 
     return X_train, X_test, Y_train, Y_test
