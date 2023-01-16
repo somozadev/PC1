@@ -48,9 +48,9 @@ def GetSplits(docs):
     X_test = []  # test docs
     Y_test = []  # corresponding test labels
 
-    # pivot = int(.80 * len(docs))  # get 80% of the docs for train
+    pivot = int(1 * len(docs))  # get 80% of the docs for train
 
-    for i in range(0, 1):
+    for i in range(0, pivot):
         X_train.append(docs[i][1])
         Y_train.append(docs[i][0])
 
